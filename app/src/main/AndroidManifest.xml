@@ -2,6 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mateusz.oleksik.smb_projekt_1">
 
+    <permission android:name="mateusz.oleksik.SHOPPING_ITEMS_PERMISSIONS" />
+    <uses-permission android:name="mateusz.oleksik.SHOPPING_ITEMS_PERMISSIONS" />
+
+<!--    <permission-group android:name="mateusz.oleksik.smb_projekt_1.custom_permissions"-->
+<!--        android:label="custom permissions group" />-->
+<!--    <permission-->
+<!--        android:name="mateusz.oleksik.smb_projekt_1.custom_permissions.SHOPPING_ITEMS_PERMISSIONS"-->
+<!--        android:permissionGroup="mateusz.oleksik.smb_projekt_1.custom_permissions"-->
+<!--        android:label="shopping item permission"/>-->
+<!--    <uses-permission-->
+<!--        android:name="mateusz.oleksik.smb_projekt_1.custom_permissions.SHOPPING_ITEMS_PERMISSIONS" />-->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,18 +34,36 @@
             android:name=".ShoppingListActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.INFO" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".EditShoppingItemActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.EDIT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CreateShoppingItemActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.EDIT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".OptionsActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.DEFINE" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>

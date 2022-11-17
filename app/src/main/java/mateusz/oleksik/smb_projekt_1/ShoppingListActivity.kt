@@ -1,5 +1,6 @@
 package mateusz.oleksik.smb_projekt_1
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -8,16 +9,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import mateusz.oleksik.smb_projekt_1.adapters.ShoppingItemAdapter
 import mateusz.oleksik.smb_projekt_1.databinding.ActivityShoppingListBinding
-import mateusz.oleksik.smb_projekt_1.fragments.CreateShoppingItemFragment
-import mateusz.oleksik.smb_projekt_1.fragments.EditShoppingItemFragment
 import mateusz.oleksik.smb_projekt_1.interfaces.IClickedShoppingItemListener
 import mateusz.oleksik.smb_projekt_1.interfaces.ICreatedShoppingItemFragmentListener
-import mateusz.oleksik.smb_projekt_1.interfaces.IEditedShoppingItemFragmentListener
 import mateusz.oleksik.smb_projekt_1.models.ShoppingItem
 import mateusz.oleksik.smb_projekt_1.viewModels.ShoppingItemViewModel
 
-class ShoppingListActivity : AppCompatActivity(), ICreatedShoppingItemFragmentListener, IEditedShoppingItemFragmentListener, IClickedShoppingItemListener {
-
+class ShoppingListActivity : AppCompatActivity(), ICreatedShoppingItemFragmentListener, IClickedShoppingItemListener {
     private lateinit var shoppingItemViewModel: ShoppingItemViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +30,7 @@ class ShoppingListActivity : AppCompatActivity(), ICreatedShoppingItemFragmentLi
         )
 
         binding.addShoppingItemButton.setOnClickListener {
-            openCreateShoppingItemDialog()
+            openCreateShoppingItemActivity()
         }
 
         shoppingItemViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(ShoppingItemViewModel::class.java)
@@ -44,22 +41,31 @@ class ShoppingListActivity : AppCompatActivity(), ICreatedShoppingItemFragmentLi
             }
         })
     }
-
-    private fun openCreateShoppingItemDialog(){
-        val dialog = CreateShoppingItemFragment(this)
-        dialog.show(supportFragmentManager, "createItemDialog")
+    
+    private fun openCreateShoppingItemActivity(){
+        val createActivityIntent = Intent(this, CreateShoppingItemActivity::class.java)
+        startActivity(createActivityIntent)
     }
 
     override fun onClickedShoppingItem(item: ShoppingItem) {
-        val dialog = EditShoppingItemFragment(this, item)
-        dialog.show(supportFragmentManager, "editItemDialog")
+        val editActivityIntent = Intent(this, EditShoppingItemActivity::class.java)
+        editActivityIntent.putExtra(Constants.ItemIDExtraID, item.id)
+        editActivityIntent.putExtra(Constants.ItemNameExtraID, item.name)
+        editActivityIntent.putExtra(Constants.ItemPriceExtraID, item.price)
+        editActivityIntent.putExtra(Constants.ItemAmountExtraID, item.amount)
+        editActivityIntent.putExtra(Constants.ItemIsBoughtExtraID, item.isBought)
+
+        startActivity(editActivityIntent)
     }
 
     override fun onCreatedShoppingItem(item: ShoppingItem) {
-        shoppingItemViewModel.insert(item)
-    }
-
-    override fun onEditedShoppingItem(item: ShoppingItem) {
-        shoppingItemViewModel.update(item)
+        val id = shoppingItemViewModel.insert(item).toInt()
+        val broadcastIntent = Intent("mateusz.oleksik.SHOPPING_ITEM_INTENT")
+        broadcastIntent.putExtra(Constants.ItemIDExtraID, id)
+        broadcastIntent.putExtra(Constants.ItemNameExtraID, item.name)
+        broadcastIntent.putExtra(Constants.ItemAmountExtraID, item.amount)
+        broadcastIntent.putExtra(Constants.ItemPriceExtraID, item.price)
+        broadcastIntent.putExtra(Constants.ItemIsBoughtExtraID, item.isBought)
+        sendOrderedBroadcast(broadcastIntent, "mateusz.oleksik.SHOPPING_ITEMS_PERMISSIONS")
     }
 }

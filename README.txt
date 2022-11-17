@@ -20,3 +20,5 @@ Na ekranie głównym należy wybrać opcje "Shopping list" aby przejść do list
 Mozliwe jest dodawanie nowych produktów (floating button w prawym dolnym rogu), edycja (należy kliknąć na produkt na liście) oraz usuwanie (przycisk "Delete").
 Przy edycji oraz tworzeniu otwierany jest nowy fragment z odpowiednimi kontrolkami. Aktywność listy produktów jest do nich wstrzykiwana jako listener aby reagować na utworzenie/edycje produktu.
 Usuwanie produktu jest zaimplementowane w klasie ShoppingItemAdapter.
+
+Link do repozytorium (w razie problemów z zip): https://github.com/MattOlecs/SMB_1
