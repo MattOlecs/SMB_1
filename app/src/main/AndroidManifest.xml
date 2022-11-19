@@ -5,15 +5,6 @@
     <permission android:name="mateusz.oleksik.SHOPPING_ITEMS_PERMISSIONS" />
     <uses-permission android:name="mateusz.oleksik.SHOPPING_ITEMS_PERMISSIONS" />
 
-<!--    <permission-group android:name="mateusz.oleksik.smb_projekt_1.custom_permissions"-->
-<!--        android:label="custom permissions group" />-->
-<!--    <permission-->
-<!--        android:name="mateusz.oleksik.smb_projekt_1.custom_permissions.SHOPPING_ITEMS_PERMISSIONS"-->
-<!--        android:permissionGroup="mateusz.oleksik.smb_projekt_1.custom_permissions"-->
-<!--        android:label="shopping item permission"/>-->
-<!--    <uses-permission-->
-<!--        android:name="mateusz.oleksik.smb_projekt_1.custom_permissions.SHOPPING_ITEMS_PERMISSIONS" />-->
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -41,6 +32,7 @@
         </activity>
         <activity
             android:name=".EditShoppingItemActivity"
+            android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.EDIT" />

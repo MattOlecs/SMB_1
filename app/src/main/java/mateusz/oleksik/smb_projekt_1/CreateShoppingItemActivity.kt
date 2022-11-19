@@ -1,5 +1,6 @@
 package mateusz.oleksik.smb_projekt_1
 
+import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -50,6 +51,9 @@ class CreateShoppingItemActivity : AppCompatActivity() {
         broadcastIntent.putExtra(Constants.ItemAmountExtraID, item.amount)
         broadcastIntent.putExtra(Constants.ItemPriceExtraID, item.price)
         broadcastIntent.putExtra(Constants.ItemIsBoughtExtraID, item.isBought)
+        broadcastIntent.component = ComponentName(
+            "mateusz.oleksik.smb_projekt_2",
+            "mateusz.oleksik.smb_projekt_2.ShoppingItemCreationReceiver")
         sendOrderedBroadcast(broadcastIntent, "mateusz.oleksik.SHOPPING_ITEMS_PERMISSIONS")
     }
 }
