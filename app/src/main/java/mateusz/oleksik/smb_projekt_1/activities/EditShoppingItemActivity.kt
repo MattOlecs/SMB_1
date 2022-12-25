@@ -1,10 +1,11 @@
-package mateusz.oleksik.smb_projekt_1
+package mateusz.oleksik.smb_projekt_1.activities
 
 import android.content.Intent
 import android.os.Bundle
 
 import androidx.appcompat.app.AppCompatActivity
-import mateusz.oleksik.smb_projekt_1.Extensions.Companion.round
+import mateusz.oleksik.smb_projekt_1.common.Constants
+import mateusz.oleksik.smb_projekt_1.common.Extensions.Companion.round
 import mateusz.oleksik.smb_projekt_1.database.ShoppingListDatabase
 import mateusz.oleksik.smb_projekt_1.database.repositories.ShoppingItemRepository
 import mateusz.oleksik.smb_projekt_1.databinding.ActivityUpsertShoppingItemBinding

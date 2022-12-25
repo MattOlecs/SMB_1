@@ -7,10 +7,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import mateusz.oleksik.smb_projekt_1.Constants
+import mateusz.oleksik.smb_projekt_1.common.Constants
 import mateusz.oleksik.smb_projekt_1.databinding.ShoppingItemsListElementBinding
 import mateusz.oleksik.smb_projekt_1.interfaces.IClickedShoppingItemListener
-import mateusz.oleksik.smb_projekt_1.interfaces.IEditedShoppingItemFragmentListener
 import mateusz.oleksik.smb_projekt_1.models.ShoppingItem
 import mateusz.oleksik.smb_projekt_1.viewModels.ShoppingItemViewModel
 

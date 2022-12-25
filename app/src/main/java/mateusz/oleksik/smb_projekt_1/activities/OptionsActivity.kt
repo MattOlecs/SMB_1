@@ -1,4 +1,4 @@
-package mateusz.oleksik.smb_projekt_1
+package mateusz.oleksik.smb_projekt_1.activities
 
 import android.content.Context
 import android.graphics.Color
@@ -7,6 +7,7 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
+import mateusz.oleksik.smb_projekt_1.common.Constants
 import mateusz.oleksik.smb_projekt_1.databinding.ActivitySettingsBinding
 
 class OptionsActivity : AppCompatActivity() {

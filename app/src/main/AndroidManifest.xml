@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="mateusz.oleksik.smb_projekt_1">
 
-    <permission android:name="mateusz.oleksik.SHOPPING_ITEMS_PERMISSIONS" />
-    <uses-permission android:name="mateusz.oleksik.SHOPPING_ITEMS_PERMISSIONS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="mateusz.oleksik.SHOPPING_ITEMS_PERMISSIONS"
+        tools:remove="android:maxSdkVersion"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:remove="android:maxSdkVersion"/>
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"
+        tools:remove="android:maxSdkVersion"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"
+        tools:remove="android:maxSdkVersion"/>
 
     <application
         android:allowBackup="true"
@@ -12,6 +21,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SMB_Projekt_1">
+
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
+
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCAnl-3POK6CPZqrTKHcECkzpiYC_Rbmf0" />
+
+        <activity
+            android:name=".activities.MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -22,7 +51,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ShoppingListActivity"
+            android:name=".activities.ShoppingListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -31,7 +60,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EditShoppingItemActivity"
+            android:name=".activities.ShopLocalizationListActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.INFO" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.EditShoppingItemActivity"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -41,7 +79,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CreateShoppingItemActivity"
+            android:name=".activities.CreateShoppingItemActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.EDIT" />
@@ -50,7 +88,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OptionsActivity"
+            android:name=".activities.CreateShopLocalizationActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.EDIT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.OptionsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.DEFINE" />
@@ -58,6 +105,20 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".receivers.GeofenceReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="mateusz.oleksik.SHOP_GEOLOCATION" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".services.NotificationsJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true"/>
     </application>
 
 </manifest>

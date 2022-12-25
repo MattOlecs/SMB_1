@@ -1,4 +1,4 @@
-package mateusz.oleksik.smb_projekt_1
+package mateusz.oleksik.smb_projekt_1.common
 
 class Extensions {
     companion object{

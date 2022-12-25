@@ -4,13 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import mateusz.oleksik.smb_projekt_1.database.DAOs.ShopLocalizationDAO
 import mateusz.oleksik.smb_projekt_1.database.DAOs.ShoppingItemDAO
+import mateusz.oleksik.smb_projekt_1.models.ShopLocalization
 import mateusz.oleksik.smb_projekt_1.models.ShoppingItem
 
-@Database(entities = [ShoppingItem::class], version = 1)
+@Database(entities = [ShoppingItem::class, ShopLocalization::class], version = 1)
 abstract class ShoppingListDatabase : RoomDatabase() {
 
     abstract fun shoppingItemDAO(): ShoppingItemDAO
+    abstract fun shopLocalizationDAO(): ShopLocalizationDAO
 
     companion object{
         private var instance: ShoppingListDatabase? = null

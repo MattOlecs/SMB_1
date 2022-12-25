@@ -14,4 +14,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "SMB_Projekt_1"
 include ':app'
-include ':app2'

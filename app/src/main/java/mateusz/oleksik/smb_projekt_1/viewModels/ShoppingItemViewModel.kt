@@ -3,7 +3,6 @@ package mateusz.oleksik.smb_projekt_1.viewModels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import mateusz.oleksik.smb_projekt_1.database.ShoppingListDatabase
 import mateusz.oleksik.smb_projekt_1.database.repositories.ShoppingItemRepository
 import mateusz.oleksik.smb_projekt_1.models.ShoppingItem

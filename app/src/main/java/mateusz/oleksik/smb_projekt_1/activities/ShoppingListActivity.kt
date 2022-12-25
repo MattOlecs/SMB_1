@@ -1,4 +1,4 @@
-package mateusz.oleksik.smb_projekt_1
+package mateusz.oleksik.smb_projekt_1.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import mateusz.oleksik.smb_projekt_1.common.Constants
 import mateusz.oleksik.smb_projekt_1.adapters.ShoppingItemAdapter
 import mateusz.oleksik.smb_projekt_1.databinding.ActivityShoppingListBinding
 import mateusz.oleksik.smb_projekt_1.interfaces.IClickedShoppingItemListener
