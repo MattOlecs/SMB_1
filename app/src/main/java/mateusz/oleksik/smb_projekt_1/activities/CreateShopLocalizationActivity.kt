@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -52,14 +53,33 @@ class CreateShopLocalizationActivity : AppCompatActivity() {
     }
 
     private fun createShopLocalization(location: Location){
-        val shopName = _binding.itemNameText.text.toString()
+        val shopText = _binding.shopNameText
+        val descriptionText = _binding.descriptionTextMultiLine
+        val radiusText = _binding.shopRadiusText
+
+        if (TextUtils.isEmpty(shopText.text)){
+            shopText.error = "Shop name cannot be empty"
+            return
+        }
+        if (TextUtils.isEmpty(descriptionText.text)){
+            shopText.error = "Description cannot be empty"
+            return
+        }
+        if (TextUtils.isEmpty(radiusText.text)){
+            shopText.error = "Radius cannot be empty"
+            return
+        }
+
+        val shopName = _binding.shopNameText.text.toString()
         val description = _binding.descriptionTextMultiLine.text.toString()
-        val newShop = ShopLocalization(0, shopName, description, 100.00, location.latitude, location.longitude)
+        val radius = _binding.shopRadiusText.text.toString().toDouble()
+
+        val newShop = ShopLocalization(0, shopName, description, radius, location.latitude, location.longitude)
 
         val dao = ShoppingListDatabase.getDatabaseInstance(application).shopLocalizationDAO()
         val repository = ShopLocalizationRepository(dao)
         repository.insert(newShop)
-        addGeolocation(newShop)
+        //addGeolocation(newShop)
 
         finish()
         val shopListActivity = Intent(applicationContext, ShopLocalizationListActivity::class.java)
@@ -93,59 +113,5 @@ class CreateShopLocalizationActivity : AppCompatActivity() {
                 Toast.makeText(this, "Could not acquire current location", Toast.LENGTH_LONG).show()
 
             }
-    }
-
-    private fun addGeolocation(shop: ShopLocalization){
-        val geoClient = LocationServices.getGeofencingClient(this)
-
-        val latLng = LatLng(shop.latitude, shop.longitude)
-        val radius = 10000F
-        val geo = Geofence.Builder().setRequestId("Geo${shop.id}")
-            .setCircularRegion(
-                latLng.latitude,
-                latLng.longitude,
-                radius
-            )
-            .setExpirationDuration(60*60*1000)
-            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER
-                    or Geofence.GEOFENCE_TRANSITION_EXIT)
-            .build()
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return
-        }
-
-        geoClient.addGeofences(getGeofencingRequest(geo),
-            getGeofencePendingIntent(shop))
-            .addOnSuccessListener {
-                Toast.makeText(
-                    this,
-                    "Geofence dodany.", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(
-                    this,
-                    "Geofence nie został dodany. ${it.message}",
-                    Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    private fun getGeofencingRequest(geofence: Geofence): GeofencingRequest{
-        return GeofencingRequest.Builder()
-            .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
-            .addGeofence(geofence)
-            .build()
-    }
-    private fun getGeofencePendingIntent(shop: ShopLocalization): PendingIntent {
-        val receiverIntent = Intent(this, GeofenceReceiver::class.java)
-
-        var promotions = arrayOf("Chleb 2.99 PLN", "Masło 4.99 PLN", "Ser gouda 12.49/kg PLN")
-
-        receiverIntent.putExtra(Constants.ShopNameExtraID, shop.name)
-        receiverIntent.putExtra(Constants.ShopPromotionExtraID, "Today's special offer: ${promotions[Random.nextInt(0, promotions.size)]}")
-        return PendingIntent.getBroadcast(
-            this, 0,
-            receiverIntent,
-            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
-
     }
 }

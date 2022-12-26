@@ -13,6 +13,7 @@ import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingEvent
 import mateusz.oleksik.smb_projekt_1.common.Constants
 import mateusz.oleksik.smb_projekt_1.services.NotificationsJobService
+import kotlin.random.Random
 
 class GeofenceReceiver : BroadcastReceiver() {
     private var _jobId = 0
@@ -44,7 +45,7 @@ class GeofenceReceiver : BroadcastReceiver() {
 
     private fun scheduleNotificationJob(context: Context, bundle: PersistableBundle){
         val cn = ComponentName(context, NotificationsJobService::class.java)
-        val info = JobInfo.Builder(_jobId++, cn)
+        val info = JobInfo.Builder(Random.nextInt(), cn)
             .setRequiresBatteryNotLow(true)
             .setPersisted(true)
             .setPeriodic(15*60*1000)

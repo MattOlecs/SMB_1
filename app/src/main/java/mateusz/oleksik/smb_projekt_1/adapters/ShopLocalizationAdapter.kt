@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.location.LocationServices
 import mateusz.oleksik.smb_projekt_1.common.Constants
 import mateusz.oleksik.smb_projekt_1.databinding.ShopLocalizationListElementBinding
 import mateusz.oleksik.smb_projekt_1.models.ShopLocalization
@@ -27,17 +28,20 @@ class ShopLocalizationAdapter(val context: Context, val shopLocalizationViewMode
     }
 
     override fun onBindViewHolder(holder: ShopLocalizationViewHolder, position: Int) {
-        val shoppingItem = shopsLocalizations[position]
-        holder.binding.shopLocalization = shoppingItem
+        val shopLocalization = shopsLocalizations[position]
+        holder.binding.shopLocalization = shopLocalization
         loadSharedPreferencesLayoutOptions(holder)
 
         holder.binding.deleteButton.setOnClickListener {
-            shopLocalizationViewModel.delete(shoppingItem)
+            shopLocalizationViewModel.delete(shopLocalization)
             Toast.makeText(
                 context,
-                "Removed ${shoppingItem.name} from list",
+                "Removed ${shopLocalization.name} from list",
                 Toast.LENGTH_SHORT)
                 .show()
+
+            val geoClient = LocationServices.getGeofencingClient(context)
+            geoClient.removeGeofences(listOf("Geo${shopLocalization.id}"))
         }
     }
 

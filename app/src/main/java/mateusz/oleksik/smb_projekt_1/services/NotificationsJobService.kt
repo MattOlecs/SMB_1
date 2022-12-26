@@ -14,6 +14,7 @@ import androidx.core.app.NotificationManagerCompat
 import mateusz.oleksik.smb_projekt_1.R
 import mateusz.oleksik.smb_projekt_1.common.Constants
 import kotlin.concurrent.thread
+import kotlin.random.Random
 
 class NotificationsJobService : JobService() {
 
@@ -48,7 +49,7 @@ class NotificationsJobService : JobService() {
             .setAutoCancel(true)
             .build()
         val notificationManager = NotificationManagerCompat.from(applicationContext)
-        notificationManager.notify(5, notification)
+        notificationManager.notify(Random.nextInt(), notification)
     }
 
     private fun createNotificationChannel(){
