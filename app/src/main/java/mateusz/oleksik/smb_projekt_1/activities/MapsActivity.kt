@@ -45,8 +45,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 )
             }
 
-            val lastAddedShop = items?.elementAt(items.lastIndex)
-            if (lastAddedShop != null){
+            if (items.isNotEmpty()){
+                val lastAddedShop = items.elementAt(items.lastIndex)
                 mMap.moveCamera(CameraUpdateFactory.zoomBy(5f))
                 val cameraPosition = CameraPosition.Builder()
                     .target(LatLng(lastAddedShop.latitude, lastAddedShop.longitude))

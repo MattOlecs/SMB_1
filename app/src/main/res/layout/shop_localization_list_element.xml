@@ -12,6 +12,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/radiusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textSize="14sp"
+            app:double_to_text="@{ShopLocalization.radius}"
+            app:layout_constraintStart_toEndOf="@+id/radiusConstantTextView"
+            app:layout_constraintTop_toTopOf="@+id/radiusConstantTextView"
+            tools:text="100" />
+
+        <TextView
+            android:id="@+id/radiusConstantTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Radius:"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/DescriptionTextView" />
+
         <Button
             android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
@@ -56,10 +78,10 @@
             android:text="Latitude:"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/DescriptionTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/radiusConstantTextView" />
 
         <TextView
-            android:id="@+id/longitutdeConstantTextView"
+            android:id="@+id/longitudeConstantTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -89,7 +111,7 @@
             android:textSize="14sp"
             tools:text="120"
             app:double_to_text="@{ShopLocalization.longitude}"
-            app:layout_constraintStart_toEndOf="@+id/longitutdeConstantTextView"
-            app:layout_constraintTop_toTopOf="@+id/longitutdeConstantTextView" />
+            app:layout_constraintStart_toEndOf="@+id/longitudeConstantTextView"
+            app:layout_constraintTop_toTopOf="@+id/longitudeConstantTextView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

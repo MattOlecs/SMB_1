@@ -64,6 +64,6 @@ class ShopLocalizationAdapter(val context: Context, val shopLocalizationViewMode
         holder.binding.nameTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize.toFloat())
         holder.binding.latitudeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize.toFloat())
         holder.binding.latitudeConstantTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize.toFloat())
-        holder.binding.longitutdeConstantTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize.toFloat())
+        holder.binding.longitudeConstantTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize.toFloat())
     }
 }
